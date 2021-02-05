@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>My Daily Tracker</title>
+</head>
+
+<body>
+    <p  style='margin: auto; text-align: center'>address: <input id='address' onchange='address = value;'/>
+    User: <input id='user' onchange='user = value;'/>
+    <button onclick='httpTest()'>test</button>
+    </p>
+    <p id='aa'></p>
+
+    <script type="text/javascript">
+
+        var address="";
+        var user ="";
+
+        function test(){
+            document.getElementById('aa').textContent=address+user;
+        }
+
+        let today = new Date();
+        let month = today.getMonth() + 1;
+        let date = today.getDate();
+        let day = today.getDay();
+
+        //let adjust = new Date(new Date.setDate(today.getDate()-day));
+        var temp = (today.getDate()%7)+7;
+        var adjust = new Date(today.setDate(today.getDate() -temp));
+
+        //테이블 생성 태그를 연다.
+        document.write("<table width='70%' border='1' style='margin: auto; text-align: center'>");
+        document.write("<tr><td style='color:red'>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td style='color:blue'>Sat</td></tr>")
+
+        // for문 시작
+        for (var i = 0; i < 6; i++) {
+            document.write("<tr>");    // <tr> : 행추가.
+
+            // 이중 for문 시작
+            for (var j = 0; j < 7; j++) {
+                var index = 7 * i + j;
+                let CalMonth = adjust.getMonth()+1;
+                let CalDate = adjust.getDate();
+                let CalDay= adjust.getDay();
+
+                if(CalDay==0){
+                    document.write("<td><label style='color:red' onclick='show()'>"+CalMonth+"/"+CalDate+"</label></td>");
+                }
+                else if(CalDay==6){
+                    document.write("<td><label style='color:blue' onclick='show()'>"+CalMonth+"/"+CalDate+"</label></td>");
+                }
+
+                else{
+                    document.write("<td><label onclick='show()'>"+CalMonth+"/"+CalDate+"</label></td>");
+                }
+
+                adjust = new Date(adjust.setDate(adjust.getDate()+1));
+                // <td> : 열추가.
+            } //end for j
+
+
+            document.write("</tr>");
+        } //end for i
+
+        document.write("</table>");   // 테이블 태그를 닫는다.
+
+
+
+        function register(){
+
+        }
+
+        function show(){
+            httpRequest.open("GET", address, true);
+            httpRequest.send();
+        }
+
+        function post(){
+
+        }
+
+       function remove(){
+           //asdfsdiaofjpdasoifjidosjpfpsdoajf
+           //fdsjnfopsdjfiodsj
+
+
+       }
+
+
+    </script>
+</body>
+
+</html>
